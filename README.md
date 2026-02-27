@@ -1,2 +1,0 @@
-# TaskVerese
-lite 
