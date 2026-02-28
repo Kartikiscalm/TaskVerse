@@ -8,6 +8,7 @@ const authRoutes = require('./routes/authRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const analyticsRoutes = require('./routes/analyticsRoutes');
 const leaderboardRoutes = require('./routes/leaderboardRoutes');
+const groupRoutes = require('./routes/groupRoutes');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use('/auth', authRoutes);
 app.use('/tasks', taskRoutes);
 app.use('/analytics', analyticsRoutes);
 app.use('/leaderboard', leaderboardRoutes);
+app.use('/groups', groupRoutes);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {

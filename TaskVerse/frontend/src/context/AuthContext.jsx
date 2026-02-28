@@ -42,15 +42,18 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const loginWithUsername = async (username) => {
+    const loginWithUsername = async (username, mode = 'signin') => {
         try {
-            const res = await api.post('/auth/login', { username });
+            const res = await api.post('/auth/login', { username, mode });
             setToken(res.data.token);
             setUser(res.data.user);
-            return true;
+            return { success: true };
         } catch (err) {
             console.error('Login failed', err);
-            return false;
+            return {
+                success: false,
+                message: err.response?.data?.message || 'The Matrix hit an unexpected error.'
+            };
         }
     };
 

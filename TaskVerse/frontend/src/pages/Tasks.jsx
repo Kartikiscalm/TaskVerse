@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import TaskCard from '../components/TaskCard';
-import { PlusIcon, XIcon } from 'lucide-react';
+import { PlusIcon, XIcon, ShieldCheckIcon } from 'lucide-react';
 
 const Tasks = () => {
     const { api, setUser } = useAuth();
@@ -82,21 +82,24 @@ const Tasks = () => {
     };
 
     return (
-        <div className="space-y-8 animate-slide-up">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-10">
+        <div className="space-y-16 animate-slide-up pb-20">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pt-4">
                 <div>
-                    <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-2">Quests</h1>
-                    <p className="text-gray-400 text-lg">Manage your roadmap to success.</p>
+                    <h1 className="text-6xl md:text-7xl font-black tracking-tight mb-4 font-outfit text-black dark:text-white text-gradient leading-none">
+                        Quests
+                    </h1>
+                    <p className="text-[#86868B] dark:text-[#A1A1A6] text-2xl font-semibold tracking-tight">Orchestrate your path to inevitable success.</p>
                 </div>
                 <button
                     onClick={() => setShowModal(true)}
-                    className="bg-white hover:bg-gray-200 text-black px-6 py-3 rounded-full flex items-center gap-2 font-semibold transition-all shadow-lg active:scale-95"
+                    className="h-16 px-10 rounded-[1.5rem] bg-black dark:bg-white text-white dark:text-black hover:scale-105 flex items-center gap-4 font-black uppercase tracking-widest text-sm transition-all shadow-2xl active:scale-95 group border-black/5 dark:border-white/10"
                 >
-                    <PlusIcon className="w-5 h-5" /> New Quest
+                    <PlusIcon className="w-6 h-6 stroke-[3] group-hover:rotate-90 transition-transform duration-300" />
+                    <span>Initiate Quest</span>
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
                 {tasks.map(task => (
                     <TaskCard
                         key={task._id}
@@ -107,87 +110,89 @@ const Tasks = () => {
                         onDuplicate={handleDuplicate}
                     />
                 ))}
+
                 {tasks.length === 0 && (
-                    <div className="col-span-full py-32 text-center">
-                        <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <PlusIcon className="w-8 h-8 text-gray-500" />
+                    <div className="col-span-full py-48 text-center glass-panel rounded-[4rem] border-black/5 dark:border-white/10 bg-white/50 dark:bg-white/[0.01] shadow-xl">
+                        <div className="w-32 h-32 bg-black/5 dark:bg-white/5 rounded-[3rem] flex items-center justify-center mx-auto mb-10 rotate-12 shadow-inner">
+                            <ShieldCheckIcon className="w-16 h-16 text-[#86868B] dark:text-[#A1A1A6] stroke-[1.5]" />
                         </div>
-                        <h3 className="text-xl font-medium text-white mb-2">No active quests</h3>
-                        <p className="text-gray-400">Click 'New Quest' to add your first objective.</p>
+                        <h3 className="text-4xl font-black text-black dark:text-white mb-4 font-outfit tracking-tighter uppercase">No Active Objectives</h3>
+                        <p className="text-[#86868B] dark:text-[#A1A1A6] text-xl font-medium italic">"The best way to predict the future is to create it."</p>
                     </div>
                 )}
             </div>
 
             {showModal && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-xl flex items-center justify-center p-4 z-[100] animate-fade-in">
-                    <div className="glass-panel w-full max-w-lg rounded-[32px] p-8 shadow-2xl animate-slide-up relative">
+                <div className="fixed inset-0 bg-white/60 dark:bg-black/80 backdrop-blur-2xl flex items-center justify-center p-6 z-[100] animate-fade-in">
+                    <div className="glass-panel w-full max-w-2xl rounded-[3.5rem] p-12 shadow-2xl animate-slide-up relative border-black/10 dark:border-white/10 overflow-hidden bg-white dark:bg-[#1C1C1E]">
+                        <div className="absolute top-0 left-0 w-full h-2.5 bg-gradient-to-r from-[#0071E3] via-[#5E5CE6] to-[#0071E3]"></div>
+
                         <button
                             onClick={() => setShowModal(false)}
-                            className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                            className="absolute top-10 right-10 p-4 rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-black dark:text-white transition-colors border border-black/5 dark:border-white/5 active:scale-90 flex items-center justify-center shadow-sm"
                         >
-                            <XIcon className="w-5 h-5" />
+                            <XIcon className="w-6 h-6 stroke-[3]" />
                         </button>
-                        <h2 className="text-3xl font-semibold mb-8">Plan Quest</h2>
 
-                        <form onSubmit={handleCreate} className="space-y-5">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-400 mb-2">Objective Title</label>
+                        <h2 className="text-5xl font-black mb-12 font-outfit text-black dark:text-white tracking-tighter uppercase">Quest Blueprint</h2>
+
+                        <form onSubmit={handleCreate} className="space-y-10">
+                            <div className="space-y-4">
+                                <label className="block text-xs font-black text-[#86868B] dark:text-[#A1A1A6] uppercase tracking-[0.3em] ml-2">Objective Designation</label>
                                 <input
                                     type="text"
                                     autoFocus
                                     required
                                     value={newTask.title}
                                     onChange={e => setNewTask({ ...newTask, title: e.target.value })}
-                                    className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all text-lg"
-                                    placeholder="Master the React Documentation..."
+                                    className="w-full bg-black/5 dark:bg-black/40 border-2 border-transparent focus:border-[#0071E3]/30 dark:focus:border-[#0A84FF]/30 rounded-[1.5rem] px-8 py-6 text-black dark:text-white placeholder:text-[#86868B] dark:placeholder:text-[#424245] focus:outline-none focus:ring-8 focus:ring-blue-500/5 transition-all text-2xl font-bold font-outfit"
+                                    placeholder="e.g. Architect the Future"
                                 />
                             </div>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-400 mb-2">Priority Level</label>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                                <div className="space-y-4">
+                                    <label className="block text-xs font-black text-[#86868B] dark:text-[#A1A1A6] uppercase tracking-[0.3em] ml-2">Priority Tier</label>
                                     <select
                                         value={newTask.priority}
                                         onChange={e => setNewTask({ ...newTask, priority: e.target.value })}
-                                        className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-4 text-white focus:outline-none focus:border-blue-500/50 appearance-none"
+                                        className="w-full bg-black/5 dark:bg-black/40 border-2 border-transparent focus:border-[#0071E3]/30 dark:focus:border-[#0A84FF]/30 rounded-[1.5rem] px-8 py-6 text-black dark:text-white focus:outline-none focus:ring-8 focus:ring-blue-500/5 appearance-none font-bold text-lg cursor-pointer transition-all"
                                     >
-                                        <option value="High">High Priority</option>
-                                        <option value="Medium">Medium Priority</option>
-                                        <option value="Low">Low Priority</option>
+                                        <option value="High">🔴 CRITICAL PRIORITY</option>
+                                        <option value="Medium">🟠 ANALYTIC PRIORITY</option>
+                                        <option value="Low">🟢 STANDARD PRIORITY</option>
                                     </select>
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-400 mb-2">Category</label>
+                                <div className="space-y-4">
+                                    <label className="block text-xs font-black text-[#86868B] dark:text-[#A1A1A6] uppercase tracking-[0.3em] ml-2">Category Sector</label>
                                     <select
                                         value={newTask.category}
                                         onChange={e => setNewTask({ ...newTask, category: e.target.value })}
-                                        className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-4 text-white focus:outline-none focus:border-blue-500/50 appearance-none"
+                                        className="w-full bg-black/5 dark:bg-black/40 border-2 border-transparent focus:border-[#0071E3]/30 dark:focus:border-[#0A84FF]/30 rounded-[1.5rem] px-8 py-6 text-black dark:text-white focus:outline-none focus:ring-8 focus:ring-blue-500/5 appearance-none font-bold text-lg cursor-pointer transition-all"
                                     >
                                         <option>Academics</option>
-                                        <option>Clubs</option>
                                         <option>Personal Growth</option>
                                         <option>Leisure</option>
+                                        <option>Athletics</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div>
-                                <label className="block text-sm font-medium text-gray-400 mb-2">Duration (Days)</label>
+                            <div className="space-y-4">
+                                <label className="block text-xs font-black text-[#86868B] dark:text-[#A1A1A6] uppercase tracking-[0.3em] ml-2">Temporal Duration (Days)</label>
                                 <input
                                     type="number"
                                     min="1"
                                     required
                                     value={newTask.totalDays}
                                     onChange={e => setNewTask({ ...newTask, totalDays: parseInt(e.target.value) || 1 })}
-                                    className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-4 text-white focus:outline-none focus:border-blue-500/50 appearance-none color-scheme-dark"
+                                    className="w-full bg-black/5 dark:bg-black/40 border-2 border-transparent focus:border-[#0071E3]/30 dark:focus:border-[#0A84FF]/30 rounded-[1.5rem] px-8 py-6 text-black dark:text-white focus:outline-none focus:ring-8 focus:ring-blue-500/5 font-black text-2xl transition-all"
                                 />
                             </div>
 
-
-
                             <div className="pt-6">
-                                <button type="submit" className="w-full bg-white text-black hover:bg-gray-200 py-4 rounded-2xl transition-all font-semibold text-lg shadow-lg">
-                                    Commit Quest
+                                <button type="submit" className="w-full bg-black dark:bg-white text-white dark:text-black hover:bg-gray-900 dark:hover:bg-gray-100 py-6 rounded-[1.75rem] transition-all font-black text-2xl shadow-2xl active:scale-[0.98] uppercase tracking-[0.2em]">
+                                    Log Objective
                                 </button>
                             </div>
                         </form>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
-import { LogOutIcon } from 'lucide-react';
+import { LogOutIcon, UserIcon, ShieldIcon, ZapIcon } from 'lucide-react';
 
 const Profile = () => {
     const { user, logout } = useAuth();
@@ -19,41 +19,69 @@ const Profile = () => {
     }
 
     return (
-        <div className="max-w-3xl mx-auto space-y-8 animate-slide-up">
-            <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-8">Account Details</h1>
+        <div className="max-w-4xl mx-auto space-y-16 animate-slide-up pb-20">
+            <header className="pt-4">
+                <h1 className="text-6xl md:text-7xl font-black tracking-tighter mb-4 font-outfit text-gradient uppercase leading-none">Identity</h1>
+                <p className="text-[#86868B] dark:text-[#A1A1A6] text-2xl font-bold tracking-tight">Detailed operational metrics for your account.</p>
+            </header>
 
-            <div className="glass-panel rounded-[32px] p-10 flex flex-col md:flex-row items-center gap-10">
-                <div className="w-40 h-40 bg-black/50 rounded-full flex items-center justify-center text-[80px] border border-white/10 shadow-2xl relative shrink-0">
-                    {currentStage.icon}
-                </div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div className="lg:col-span-1 glass-panel rounded-[3.5rem] p-12 flex flex-col items-center justify-center text-center relative overflow-hidden group bg-white/90 dark:bg-black/40 shadow-2xl">
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0071E3]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
-                <div className="flex-1 text-center md:text-left flex flex-col items-center md:items-start">
-                    <h2 className="text-4xl font-semibold tracking-tight mb-2 truncate block w-full">{user.name}</h2>
-                    <div className="inline-flex items-center bg-blue-500/10 border border-blue-500/20 text-blue-400 font-semibold tracking-widest uppercase text-xs px-4 py-1.5 rounded-full mb-8">
+                    <div className="w-48 h-48 bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 backdrop-blur-3xl rounded-[4rem] flex items-center justify-center text-[100px] shadow-2xl relative mb-10 rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                        {currentStage.icon}
+                    </div>
+
+                    <h2 className="text-4xl font-black font-outfit mb-3 tracking-tighter text-black dark:text-white uppercase">{user.name}</h2>
+                    <div className="inline-flex items-center bg-[#0071E3]/10 dark:bg-[#0A84FF]/10 border border-[#0071E3]/20 dark:border-[#0A84FF]/20 text-[#0071E3] dark:text-[#0A84FF] font-black tracking-[0.3em] uppercase text-[10px] px-8 py-2.5 rounded-full mb-12">
                         {currentStage.name} Tier
                     </div>
 
                     <button
                         onClick={logout}
-                        className="flex items-center gap-2 text-white bg-red-500 hover:bg-red-600 transition-colors px-6 py-3 rounded-full font-semibold shadow-lg shadow-red-500/20"
+                        className="w-full h-16 flex items-center justify-center gap-4 text-[#FF453A] bg-[#FF453A]/5 hover:bg-[#FF453A]/10 border border-[#FF453A]/10 transition-all rounded-[2rem] font-black uppercase tracking-widest text-xs active:scale-95 shadow-lg"
                     >
-                        <LogOutIcon className="w-5 h-5" /> Sign Out Device
+                        <LogOutIcon className="w-5 h-5 stroke-[2.5]" /> Terminate Session
                     </button>
                 </div>
-            </div>
 
-            <div className="glass-panel rounded-[32px] p-8 md:p-10">
-                <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">Tier Progression</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    {stages.map(s => (
-                        <div key={s.level} className={`flex flex-col items-center justify-center p-6 rounded-2xl border transition-all ${user.level >= s.level ? 'bg-white/5 border-white/20 shadow-lg' : 'bg-black/30 border-white/5 opacity-50 grayscale'}`}>
-                            <div className="text-4xl mb-3">{s.icon}</div>
-                            <span className="font-semibold text-white mb-1">{s.name}</span>
-                            <div className={`text-xs font-semibold px-3 py-1 rounded-full ${user.level >= s.level ? 'bg-blue-500 text-white' : 'bg-white/10 text-gray-400'}`}>
-                                {user.level >= s.level ? 'UNLOCKED' : `Lv ${s.level} REQ`}
-                            </div>
+                <div className="lg:col-span-2 space-y-10">
+                    <div className="glass-panel p-12 rounded-[3.5rem] bg-white/90 dark:bg-black/60 shadow-2xl border-black/5 dark:border-white/10">
+                        <h3 className="text-xs font-black uppercase tracking-[0.4em] text-[#86868B] dark:text-[#A1A1A6] mb-12 flex items-center gap-6">
+                            <ShieldIcon className="w-6 h-6 text-[#0071E3] dark:text-[#0A84FF] stroke-[2.5]" /> Evolution stages
+                        </h3>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
+                            {stages.map(s => (
+                                <div key={s.level} className={`flex flex-col items-center justify-center p-8 rounded-[3rem] border transition-all duration-700 ${user.level >= s.level
+                                    ? 'bg-black/[0.03] dark:bg-white/[0.05] border-black/5 dark:border-white/10 shadow-xl scale-100'
+                                    : 'bg-black/5 dark:bg-white/[0.02] border-transparent opacity-30 grayscale scale-95'
+                                    }`}>
+                                    <div className="text-6xl mb-8">{s.icon}</div>
+                                    <span className={`font-black mb-3 font-outfit uppercase tracking-tighter text-lg ${user.level >= s.level ? 'text-black dark:text-white' : 'text-[#86868B] dark:text-[#424245]'}`}>{s.name}</span>
+                                    <div className={`text-[9px] font-black px-5 py-2 rounded-full border ${user.level >= s.level
+                                        ? 'bg-[#0071E3]/10 dark:bg-[#0A84FF]/10 text-[#0071E3] dark:text-[#0A84FF] border-[#0071E3]/20 dark:border-[#0A84FF]/20'
+                                        : 'bg-black/5 dark:bg-white/5 text-[#86868B] dark:text-[#424245] border-transparent'
+                                        }`}>
+                                        {user.level >= s.level ? 'UNLOCKED' : `REQ LVL ${s.level}`}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-10">
+                        <div className="glass-card p-12 rounded-[3.5rem] bg-white/90 dark:bg-black/40 shadow-2xl border-black/5 dark:border-white/10 group flex flex-col items-center text-center">
+                            <ZapIcon className="w-12 h-12 text-[#FF9500] mb-8 group-hover:scale-110 transition-transform duration-500 stroke-[2.5]" />
+                            <p className="text-6xl font-black text-black dark:text-white font-outfit mb-2 tracking-tighter">{user.streak}</p>
+                            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#86868B] dark:text-[#A1A1A6]">Atomic Streak</p>
+                        </div>
+                        <div className="glass-card p-12 rounded-[3.5rem] bg-white/90 dark:bg-black/40 shadow-2xl border-black/5 dark:border-white/10 group flex flex-col items-center text-center">
+                            <UserIcon className="w-12 h-12 text-[#0071E3] dark:text-[#0A84FF] mb-8 group-hover:scale-110 transition-transform duration-500 stroke-[2.5]" />
+                            <p className="text-6xl font-black text-black dark:text-white font-outfit mb-2 tracking-tighter">{user.level}</p>
+                            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#86868B] dark:text-[#A1A1A6]">Global Level</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
