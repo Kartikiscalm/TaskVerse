@@ -5,7 +5,6 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Tasks from './pages/Tasks';
 import Leaderboard from './pages/Leaderboard';
-import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import Groups from './pages/Groups';
 import Audit from './pages/Audit';
@@ -22,7 +21,7 @@ const ProtectedRoute = ({ children }) => {
     return (
         <div className="min-h-screen overflow-x-hidden pt-56 pb-32 transition-colors duration-500">
             <div className="mesh-gradient"></div>
-            <Navbar/>
+            <Navbar />
             <main className="container mx-auto px-6 md:px-12 max-w-[1400px]">
                 {children}
             </main>
@@ -48,7 +47,6 @@ function App() {
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/tasks" element={<ProtectedRoute><Tasks /></ProtectedRoute>} />
                 <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
-                <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                 <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
                 <Route path="/groups" element={<ProtectedRoute><Groups /></ProtectedRoute>} />
                 <Route path="/audit" element={<ProtectedRoute><Audit /></ProtectedRoute>} />

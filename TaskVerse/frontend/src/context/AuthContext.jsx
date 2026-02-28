@@ -42,9 +42,9 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const loginWithUsername = async (username, mode = 'signin') => {
+    const loginWithUsername = async (username, password, mode = 'signin') => {
         try {
-            const res = await api.post('/auth/login', { username, mode });
+            const res = await api.post('/auth/login', { username, password, mode });
             setToken(res.data.token);
             setUser(res.data.user);
             return { success: true };
@@ -61,8 +61,20 @@ export const AuthProvider = ({ children }) => {
         setToken(null);
     };
 
+    const loginWithGoogle = async (tokenResponse) => {
+        try {
+            const res = await api.post('/auth/google', { googleToken: tokenResponse.credential });
+            setToken(res.data.token);
+            setUser(res.data.user);
+            return { success: true };
+        } catch (err) {
+            console.error('Google login failed', err);
+            return { success: false, message: 'Google authentication failed.' };
+        }
+    };
+
     return (
-        <AuthContext.Provider value={{ user, setUser, token, loginWithUsername, logout, loading, api }}>
+        <AuthContext.Provider value={{ user, setUser, token, loginWithUsername, loginWithGoogle, logout, loading, api }}>
             {children}
         </AuthContext.Provider>
     );

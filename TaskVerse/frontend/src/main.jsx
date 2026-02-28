@@ -5,12 +5,16 @@ import './index.css'
 import { AuthProvider } from './context/AuthContext.jsx'
 import { ThemeProvider } from './context/ThemeContext.jsx'
 
+import { GoogleOAuthProvider } from '@react-oauth/google'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <ThemeProvider>
-            <AuthProvider>
-                <App />
-            </AuthProvider>
-        </ThemeProvider>
+        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+            <ThemeProvider>
+                <AuthProvider>
+                    <App />
+                </AuthProvider>
+            </ThemeProvider>
+        </GoogleOAuthProvider>
     </React.StrictMode>,
 )
