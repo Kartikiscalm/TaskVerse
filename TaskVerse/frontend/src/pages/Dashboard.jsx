@@ -2,6 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { CheckCircleIcon, TrendingUpIcon, ActivityIcon } from 'lucide-react';
 
+const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) return 'Good Morning';
+    if (hour >= 12 && hour < 17) return 'Good Afternoon';
+    if (hour >= 17 && hour < 21) return 'Good Evening';
+    return 'Good Night';
+};
+
 const Dashboard = () => {
     const { user, api } = useAuth();
     const [analytics, setAnalytics] = useState(null);
@@ -25,7 +33,7 @@ const Dashboard = () => {
             <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pt-4">
                 <div>
                     <h1 className="text-6xl md:text-7xl font-black tracking-tight mb-4 font-outfit text-black dark:text-white leading-none">
-                        Morning, <span className="text-gradient">{user.name.split(' ')[0]}</span>
+                        {getGreeting()}, <span className="text-gradient">{user.name.split(' ')[0]}</span>
                     </h1>
                     <p className="text-[#86868B] dark:text-[#A1A1A6] text-2xl font-semibold tracking-tight">Your daily performance brief is ready.</p>
                 </div>
