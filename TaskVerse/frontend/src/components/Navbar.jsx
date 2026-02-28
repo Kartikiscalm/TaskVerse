@@ -23,17 +23,17 @@ const Navbar = () => {
                     <NavLink to="/tasks" className={({ isActive }) => isActive ? activeClass : currClass}>
                         <ListIcon className="w-5 h-5 stroke-[2.5]" /> <span className="hidden md:block">Quests</span>
                     </NavLink>
-                    <NavLink to="/leaderboard" className={({ isActive }) => isActive ? activeClass : currClass}>
-                        <TrophyIcon className="w-5 h-5 stroke-[2.5]" /> <span className="hidden md:block">Ranks</span>
-                    </NavLink>
-                    <NavLink to="/profile" className={({ isActive }) => isActive ? activeClass : currClass}>
-                        <UserIcon className="w-5 h-5 stroke-[2.5]" /> <span className="hidden md:block">Profile</span>
-                    </NavLink>
                     <NavLink to="/groups" className={({ isActive }) => isActive ? activeClass : currClass}>
                         <UsersIcon className="w-5 h-5 stroke-[2.5]" /> <span className="hidden md:block">Squad</span>
                     </NavLink>
+                    <NavLink to="/leaderboard" className={({ isActive }) => isActive ? activeClass : currClass}>
+                        <TrophyIcon className="w-5 h-5 stroke-[2.5]" /> <span className="hidden md:block">Ranks</span>
+                    </NavLink>
                     <NavLink to="/audit" className={({ isActive }) => isActive ? activeClass : currClass}>
                         <TrendingUp className="w-5 h-5 stroke-[2.5]" /> <span className="hidden md:block">Progress</span>
+                    </NavLink>
+                    <NavLink to="/profile" className={({ isActive }) => isActive ? activeClass : currClass}>
+                        <UserIcon className="w-5 h-5 stroke-[2.5]" /> <span className="hidden md:block">Profile</span>
                     </NavLink>
                     <NavLink to="/settings" className={({ isActive }) => isActive ? activeClass : currClass}>
                         <SettingsIcon className="w-5 h-5 stroke-[2.5]" /> <span className="hidden md:block">Settings</span>
