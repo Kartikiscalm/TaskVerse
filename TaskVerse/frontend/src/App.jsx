@@ -22,7 +22,7 @@ const ProtectedRoute = ({ children }) => {
     return (
         <div className="min-h-screen overflow-x-hidden pt-56 pb-32 transition-colors duration-500">
             <div className="mesh-gradient"></div>
-            <Navbar />
+            <Navbar/>
             <main className="container mx-auto px-6 md:px-12 max-w-[1400px]">
                 {children}
             </main>
