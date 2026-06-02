@@ -153,4 +153,4 @@ TaskVerse/
 │   └── public/             # Static assets
 └── README.md
 ```
-
+note : this project is fully vibe coded, unlike others
