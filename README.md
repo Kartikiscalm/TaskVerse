@@ -6,7 +6,7 @@ TaskVerse is a professional, high-performance task management and collaborative 
 
 ## 🚀 Key Features
 
--   **🔐 Secure Authentication**: Integrated JWT-based authentication and Google OAuth 2.0.
+-   **🔐 Secure Authentication**: Robust JWT-based authentication for secure user sessions and data protection.
 -   **📅 Collaborative Task Management**: Seamlessly create, assign, and track tasks within groups or individually.
 -   **📊 Advanced Analytics**: Visualize productivity trends and task completion metrics through a dedicated analytics dashboard.
 -   **🏆 Gamified Leaderboard**: Boost team productivity with a competitive leaderboard based on task performance.
@@ -32,7 +32,7 @@ graph TD
     Frontend -->|API Calls / REST| Backend[Express.js Server]
 
     subgraph "Backend (Node.js)"
-        Backend -->|Middleware| AuthMiddleware[JWT & Google Auth Validation]
+        Backend -->|Middleware| AuthMiddleware[JWT Token Validation]
         Backend -->|Controllers| TaskController[Task Logic]
         Backend -->|Controllers| AnalyticsController[Analytics Engine]
         Backend -->|Models| Mongoose[Mongoose Schemas]
@@ -52,7 +52,7 @@ graph TD
 -   **Frontend**: React.js, Vite, Tailwind CSS, Axios, Lucide React, Framer Motion.
 -   **Backend**: Node.js, Express.js.
 -   **Database**: MongoDB (Mongoose ORM).
--   **Authentication**: JSON Web Tokens (JWT), Google OAuth 2.0.
+-   **Authentication**: JSON Web Tokens (JWT).
 -   **DevOps**: Vercel (Deployment), Mongodb-Memory-Server (Local Testing).
 
 ---
@@ -62,7 +62,6 @@ graph TD
 ### Prerequisites
 -   [Node.js](https://nodejs.org/) (v16+ recommended)
 -   [MongoDB](https://www.mongodb.com/) (Local or Atlas)
--   [Google Cloud Console Project](https://console.cloud.google.com/) (for OAuth)
 
 ### 1. Clone the Repository
 ```bash
@@ -84,7 +83,6 @@ cd TaskVerse
    PORT=5001
    MONGODB_URI=your_mongodb_connection_string
    JWT_SECRET=your_super_secret_key
-   GOOGLE_CLIENT_ID=your_google_client_id
    FRONTEND_URL=http://localhost:5173
    ```
 4. Start the server:
@@ -104,7 +102,6 @@ cd TaskVerse
 3. Create a `.env` file in the `frontend/` folder:
    ```env
    VITE_API_URL=http://localhost:5001
-   VITE_GOOGLE_CLIENT_ID=your_google_client_id
    ```
 4. Start the development server:
    ```bash
@@ -124,7 +121,6 @@ TaskVerse is optimized for deployment on **Vercel**. Since the project consists 
 4. Add the following **Environment Variables**:
    - `MONGODB_URI`: Your MongoDB Atlas connection string.
    - `JWT_SECRET`: Your production secret key.
-   - `GOOGLE_CLIENT_ID`: Your Google OAuth client ID.
    - `FRONTEND_URL`: The URL of your deployed frontend (you may need to update this after deploying the frontend).
 5. Click **Deploy**.
 
@@ -134,7 +130,6 @@ TaskVerse is optimized for deployment on **Vercel**. Since the project consists 
 3. The **Framework Preset** should be automatically detected as `Vite`.
 4. Add the following **Environment Variables**:
    - `VITE_API_URL`: The URL of your deployed backend (from Step 1).
-   - `VITE_GOOGLE_CLIENT_ID`: Your Google OAuth client ID.
 5. Click **Deploy**.
 
 ---
@@ -158,6 +153,4 @@ TaskVerse/
 │   └── public/             # Static assets
 └── README.md
 ```
-
-
 
