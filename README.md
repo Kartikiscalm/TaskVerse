@@ -1,4 +1,4 @@
-# 🌌 TaskVerse
+# TaskVerse
 
 TaskVerse is a professional, high-performance task management and collaborative analytics platform. It empowers users and teams to manage tasks, track productivity through advanced analytics, and engage in gamified competition via leaderboards.
 
